@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifier Results</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Results</h1>
+
+        {% if classifier_results %}
+        <h2>Classifier Results</h2>
+        {% for result in classifier_results %}
+        <div class="classifier-result">
+            <h3>{{ result.classifier }} Results</h3>
+            <p><strong>Accuracy:</strong> {{ result.accuracy * 100 }}%</p>
+            <p><strong>AUC:</strong> {{ result.roc_auc }}</p>
+            <p><strong>Sample Probabilities:</strong> {{ result.sample_probabilities }}</p>
+            <p><strong>Predictions (first 5 samples):</strong> {{ result.predictions }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if comparative_results %}
+        <h2>Comparative Analysis (Accuracy Before vs After Tuning)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Classifier</th>
+                    <th>Accuracy Before</th>
+                    <th>Accuracy After</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in comparative_results %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ result[0] }}</td>
+                    <td>{{ result[2] }}</td>
+                    <td>{{ result[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <!-- Only show the download button if classifiers were selected and evaluated -->
+        {% if classifier_results %}
+        <a href="/download_model" class="download-btn">Download Ensemble Model</a>
+        {% endif %}
+
+        <!-- Back Button -->
+        <a href="/">Go Back</a>
+    </div>
+</body>
+</html>

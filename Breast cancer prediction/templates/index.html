@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Prediction</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Breast Cancer Prediction</h1>
+
+        <form action="/" method="POST">
+            <h2>Select Overview Options</h2>
+            <div class="checkbox-group">
+                <input type="checkbox" name="overview" value="Correlation Graph" id="CorrelationGraph">
+                <label for="CorrelationGraph">Correlation Graph</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="overview" value="Dataset Features" id="DatasetFeatures">
+                <label for="DatasetFeatures">Dataset Features</label>
+            </div>
+
+            <h2>Select Classifiers</h2>
+            <div class="checkbox-group">
+                <input type="checkbox" name="classifier" value="KNN" id="KNN">
+                <label for="KNN">KNN</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="classifier" value="ANN" id="ANN">
+                <label for="ANN">ANN</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="classifier" value="Decision Tree" id="DecisionTree">
+                <label for="DecisionTree">Decision Tree</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="classifier" value="SVC" id="SVC">
+                <label for="SVC">SVC</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="classifier" value="Logistic Regression" id="LogisticRegression">
+                <label for="LogisticRegression">Logistic Regression</label>
+            </div>
+
+            <h2>Comparative Analysis</h2>
+            <div class="checkbox-group">
+                <input type="checkbox" name="comparative_analysis" value="Comparative Analysis" id="ComparativeAnalysis">
+                <label for="ComparativeAnalysis">Show Comparative Analysis (Accuracy Before vs After Tuning)</label>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
