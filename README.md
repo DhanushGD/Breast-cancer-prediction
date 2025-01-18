@@ -31,13 +31,17 @@ The goal of this project is to develop an AI-powered system that can predict bre
 1. Clone this repository:
    ```bash
    git clone https:https://github.com/DhanushGD/Breast-cancer-prediction.git
+   ```
 2. Install required libraries:
 ```bash
    pip install -r requirements.txt
+```
+
 3. Download the Breast Cancer Wisconsin dataset and place it in the project directory.
 4. Run the Flask application:
 ```bash
    python app.py
+```
 5. Open the browser and go to http://127.0.0.1:5000/ to interact with the model.
 
 ##Usage
