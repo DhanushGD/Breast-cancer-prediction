@@ -88,6 +88,7 @@ def train_and_evaluate(classifier_names):
         if clf:
             try:
                 print(f"Training and evaluating {classifier_name}...")
+
                 clf.fit(X_train, y_train)
                 y_pred = clf.predict(X_test)
 
@@ -102,7 +103,8 @@ def train_and_evaluate(classifier_names):
 
                 auc = roc_auc_score(y_test, y_pred_proba) if hasattr(clf, 'predict_proba') else None
 
-                generate_roc_curve(clf, classifier_name)
+                # Generate ROC curve image
+                roc_curve_path = generate_roc_curve(clf, classifier_name)
 
                 prob = None
                 sample_probabilities = None
@@ -116,12 +118,13 @@ def train_and_evaluate(classifier_names):
 
                 result = {
                     'classifier': classifier_name,
-                    'accuracy': accuracy,
+                    'accuracy': accuracy,  # Now added 'accuracy' here.
                     'confusion_matrix': confusion,
                     'classification_report': report,
                     'roc_auc': auc,
                     'sample_probabilities': sample_probabilities,
-                    'predictions': [("Malignant" if p == 0 else "Benign") for p in y_pred[:5]]
+                    'predictions': [("Malignant" if p == 0 else "Benign") for p in y_pred[:5]],
+                    'roc_curve_image': roc_curve_path  # Add the ROC curve image path here
                 }
                 results.append(result)
             except Exception as e:
@@ -133,7 +136,8 @@ def train_and_evaluate(classifier_names):
                     'classification_report': None,
                     'roc_auc': None,
                     'sample_probabilities': None,
-                    'predictions': []
+                    'predictions': [],
+                    'roc_curve_image': None  # Ensure empty result for errors
                 })
 
     return results
@@ -158,14 +162,30 @@ def comparative_analysis():
             accuracy_percentage_before = f'{accuracy_before * 100:.2f}%'
             accuracy_percentage_after = f'{accuracy_after * 100:.2f}%'
 
+            # Calculate AUC before and after tuning
+            if hasattr(model, 'predict_proba'):
+                auc_before = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])
+            else:
+                auc_before = None
+
+            if hasattr(tuned_model, 'predict_proba'):
+                auc_after = roc_auc_score(y_test, tuned_model.predict_proba(X_test)[:, 1])
+            else:
+                auc_after = None
+
             accuracy_results.append(
-                (name, accuracy_before, accuracy_percentage_before, accuracy_after, accuracy_percentage_after))
+                {'classifier': name,
+                 'accuracy_before': accuracy_before,
+                 'accuracy_after': accuracy_after,
+                 'auc_before': auc_before,
+                 'auc_after': auc_after}
+            )
         except Exception as e:
             print(f"Error occurred while evaluating {name}: {e}")
-            accuracy_results.append((name, None, None, None, None))
+            accuracy_results.append({'classifier': name, 'accuracy_before': None, 'accuracy_after': None, 'auc_before': None, 'auc_after': None})
 
-    accuracy_results = [result for result in accuracy_results if result[1] is not None]
-    accuracy_results.sort(key=lambda x: x[1], reverse=True)
+    accuracy_results = [result for result in accuracy_results if result['accuracy_before'] is not None]
+    accuracy_results.sort(key=lambda x: x['accuracy_before'], reverse=True)
 
     return accuracy_results
 
