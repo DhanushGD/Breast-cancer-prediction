@@ -46,5 +46,14 @@ The goal of this project is to develop an AI-powered system that can predict bre
 
 ## Usage
 - On the homepage, select the classifiers and overview options you want to evaluate.
+  ![Screenshot 2025-01-18 190634](https://github.com/user-attachments/assets/3ccb9021-543a-464c-afa3-d364670d5fac)
+
 - The system will display results like accuracy, confusion matrix, classification report, and ROC curve.
+  ![Screenshot 2025-01-18 190859](https://github.com/user-attachments/assets/29ae02d2-4152-4831-9bac-0a32f49019aa)
+
+  ![Screenshot 2025-01-18 192154](https://github.com/user-attachments/assets/af92e258-5d73-446a-9f81-f2187238e1a3)
+
+- Comparative Analysis
+  ![Screenshot 2025-01-18 183008](https://github.com/user-attachments/assets/458e3ef3-3633-4062-b7f3-09659d8fbc44)
+
 - You can also download the trained ensemble model after evaluating the classifiers.
