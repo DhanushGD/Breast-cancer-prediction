@@ -16,13 +16,11 @@ import shap
 import seaborn as sns
 import os
 
-# Initialize Flask app
 app = Flask(__name__)
 
 # Load your dataset (assuming "data.csv" is in the correct location)
 dataset = pd.read_csv("data.csv")
 
-# Define features and target
 prediction_features = ["radius_mean", 'perimeter_mean', 'area_mean', 'symmetry_mean', 'compactness_mean',
                        'concave points_mean']
 targeted_feature = 'diagnosis'
@@ -30,19 +28,15 @@ targeted_feature = 'diagnosis'
 X = dataset[prediction_features]
 y = dataset[targeted_feature]
 
-# Label encode the target feature
 label_encoder = LabelEncoder()
 y = label_encoder.fit_transform(y)
 
-# Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=15)
 
-# Standardize the data
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# Define the classifiers
 classifiers = {
     'KNN': KNeighborsClassifier(n_neighbors=5),
     'ANN': MLPClassifier(hidden_layer_sizes=(100, 50), max_iter=500, random_state=15),
