@@ -3,14 +3,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
-# Load the dataset
 dataset = pd.read_csv("data.csv")  # Replace with your actual dataset file path
 
-# Encode the 'diagnosis' column (string 'M' and 'B' into numeric 0 and 1)
 label_encoder = LabelEncoder()
 dataset['diagnosis'] = label_encoder.fit_transform(dataset['diagnosis'])
 
-# Function to generate the Correlation Graph and save it in static
 def generate_correlation_graph():
     sns.set_style('darkgrid')
 
